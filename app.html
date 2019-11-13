@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/assets/style.css">
+    <title>Subneting resolver</title>
+</head>
+<body>
+    <div id="mainContainer">
+        <div>
+            <h1>Ingrese parámetros para el calculo</h1>
+            <form id="calculationForm">
+                <input type="text" id="txtNet" placeholder="Direccion IP">
+                <input type="number" id="txtMask" placeholder="Máscara de red">
+                <input type="number" id="txtAmount" placeholder="Cuantas sub redes quieres crear ?">
+                <input type="submit" id="Calcular" value="Ejecutar">
+            </form>
+        </div>
+        <table id="subnetsDisplayer">
+            <tr>
+                <th>SubnetIp</th>
+                <th>First useful</th>
+                <th>Last useful</th>
+                <th>Broadcast</th>
+            </tr>
+        </table>
+    </div>
+</body>
+<script src="/assets/usefulFunctions.js"></script>
+<script src="/assets/app.js"></script>
+</html>

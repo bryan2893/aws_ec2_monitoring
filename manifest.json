@@ -1,0 +1,18 @@
+{
+    "manifest_version": 2,
+    "name": "Aws EC2 monitoring",
+    "description": "Chrome extension to resolve subneting given an ip addres and its net mask",
+    "version": "1.0",
+    "chrome_url_overrides": {
+        "history": "app.html"
+    },
+    "browser_action": {
+        "default_title": "Aws EC2 monitoring",
+        "defaul_icon": ""
+    },
+    "background":{
+        "scripts": ["background.js"],
+        "persistent": false
+    },
+    "permissions": ["cookies","tabs"]
+}

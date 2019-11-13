@@ -1,0 +1,61 @@
+body{
+    margin: 0px;
+    background-color: rgba(0,0,0,.7);
+}
+
+form{
+    width: 400px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 3px;
+}
+
+input[type="text"]{
+    height: 30px;
+    border-radius: 10px;
+    width: 100%;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+input[type="number"]{
+    height: 30px;
+    border-radius: 10px;
+    width: 100%;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+input[type="submit"]{
+    height: 30px;
+    border-radius: 20px;
+    width: 50%;
+}
+
+input[type="submit"]:hover{
+    cursor: pointer;
+}
+
+#mainContainer{
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#subnetsDisplayer{
+    width: 90%;
+    text-align: center;
+    color: white;
+}
+
+td{
+    font-size: 1.5em;
+}
+
+th{
+    font-size: 1.5em;
+}
