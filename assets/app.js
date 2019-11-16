@@ -1,78 +1,57 @@
 document.addEventListener('DOMContentLoaded', function(){
+
     /*
-    let urlToHtmlExcelPainted = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSMUCyMmuAMSrvhxDIbede2LN9N7HDkvaESICz7FZhlD3aAzOg3hXta7FaaHjyJSySsBpC7_m3ucJgc/pubhtml";
-    let pTagError = document.querySelector('p');
-    let textArea = document.getElementById("displayer");
+    Configuracion amazon aws-jdk
+    ID de clave de acceso: AKIAI5GNXU5CNWHMAC4Q
+    Clave de acceso secreta: 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
 
-    function fillTextArea(content){
-        textArea.value = content;
-    }
-
-    function cleanTextArea(){
-        textArea.value = "";
-    }
-
-    function showError(errorMessage){
-        pTagError.textContent = errorMessage;
-    }
-
-    function cleanErrorMessage(){
-        pTagError.textContent = "";
-    }
-
-    function onCLick(){
-        let workerName = document.querySelector('input');
-        if (workerName.value === ""){
-            //mostrar mensaje de error.
-            showError("¡ERROR: Ingrese número de puerto!");
-        }else{
-            let workerstring = workerName.value;
-            fetch(urlToHtmlExcelPainted)
-                .then((result) => result.text()).then(function(text){
-
-                    let parser = new DOMParser();
-                    let doc = parser.parseFromString(text, "text/html");
-
-                    let tabla = doc.getElementsByTagName("table")[0];
-
-                    let cellNodes = tabla.getElementsByTagName("td");
-
-                    let founded = "";
-                    for (let i = 0; i<cellNodes.length;i++){
-                        let currentData = cellNodes[i].textContent.toString();
-
-                        if (currentData.includes(workerstring)) {
-                            founded += "[Nombre: "+currentData+", extension: "+cellNodes[i+1].textContent+"]\n";//firstChild
-                        }
-                    }         
-                    
-                    if(founded){
-                        fillTextArea(founded);
-                    }else{
-                        fillTextArea("No coincide!");
-                    }
-
-                })
-                .catch(function(error) {
-                    // This is where you run code if the server returns any errors
-                    chrome.tabs.query({currentWindow:true,active:true}, function(tabs){
-                        chrome.tabs.sendMessage(tabs[0].id,{type:"error",payload:error.message});
-                    });
-                });
-        }
-    }
-
-    document.querySelector('button').addEventListener('click',onCLick,false);
-
-    function whenInputisFocused(){
-        cleanErrorMessage();
-        cleanTextArea();
-    }
-
-    document.querySelector('input').addEventListener('focus',whenInputisFocused,false)
-
+    version = 2012-10-17
     */
 
+    AWS.config.region = 'us-east-1'; // Región
+    AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+        IdentityPoolId: 'us-east-1:9125dd84-5a17-4879-b6dd-093e3fa3f419',
+    });
+
+    AWS.config.credentials.get(function(err) {
+        if (err) console.log(err);
+        else {
+            console.log(AWS.config.credentials);
+        }
+    });
+
+    /*
+    Statistics: [
+          "SampleCount" | "Average" | "Sum" | "Minimum" | "Maximum"
+        ]
+
+    Unit: "Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" 
+    | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" 
+    | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" 
+    | "Bits/Second" | "Kilobits/Second"
+    | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None"
+    */
+
+    let params = {
+        EndTime: '2019-11-15T21:30:00Z',
+        MetricName: 'CPUUtilization',
+        Dimensions:[{Name:"yAxis",Value:"left"}],
+        Namespace: 'AWS/EC2',
+        Period: 300,
+        StartTime: '2019-11-15T18:00:00Z',
+        Statistics: ["Maximum"],
+        Unit: "Seconds"
+    };
+    
+    let cloudwatch = new AWS.CloudWatch({apiVersion: '2012-10-17'});
+
+    cloudwatch.getMetricStatistics(params, function(err, data) {
+        if (err) console.log(err, err.stack); // an error occurred
+        else     console.log(data);           // successful response
+    });
+
+
+    /*App logic*/
     const createRow = function(rowObject){
 
         let tr = document.createElement("tr");
